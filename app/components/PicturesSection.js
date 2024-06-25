@@ -26,6 +26,7 @@ const PicturesSection = () => {
         fetchImages();
     }, []);
 
+    console.log(images); // Add logging for images array
     return (
         <div>
             <h2 className="text-2xl font-bold mb-4">Pictures Section</h2>
@@ -47,7 +48,7 @@ const PicturesSection = () => {
                             <Image
                                 src={image.url}
                                 alt={image.key}
-                                layout="fill" // Use "fill" to fill the container div
+                                fill
                                 objectFit="cover" // Adjust as per your design needs
                             />
                         </div>
