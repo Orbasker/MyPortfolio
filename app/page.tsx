@@ -4,6 +4,7 @@ import SocialLinks from '@/app/components/SocialLinks';
 import ProjectList from '@/app/components/ProjectList';
 import JobHIstory from '@/app/components/JobHistory';
 import QRCodeResume from '@/app/components/QRCodeResume';
+import ContactLink from '@/app/components/ContactLink';
 
 export default function Home() {
     return (
@@ -14,8 +15,20 @@ export default function Home() {
             <header className="text-center mb-8">
                 <h1 className="text-4xl font-bold">Welcome to My Portfolio</h1>
             </header>
-            <main className="container mx-auto">
-                <QRCodeResume />
+            <main className="container mx-auto p-4">
+                <div className="flex flex-col md:flex-row md:space-x-4">
+                    <div className="flex-1">
+                        <h2 className="text-2xl font-bold">About Me</h2>
+                        <p>
+                            I'm a software engineer with experience in web development, cloud computing, and DevOps. I'm passionate about learning new technologies and sharing my knowledge with others.
+                        </p>
+                        <QRCodeResume />
+                    </div>
+                    <div className="flex-1">
+                        <ContactLink />
+                    </div>
+                 
+                </div>
                 {/* <JobHIstory /> */}
                 {/* <ProjectList /> */}
                 <PicturesSection />

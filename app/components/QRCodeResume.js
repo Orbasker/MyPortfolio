@@ -43,7 +43,7 @@ const QRCodeResume = () => {
 
     return (
         <div>
-            <Typography variant="h2" className="mb-4">QR Code to Resume</Typography>
+            {/* <Typography variant="h5" className="mb-4">scan to my Resume</Typography> */}
             <QRCode value={url} />
         </div>
     );

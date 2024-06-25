@@ -1,13 +1,9 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 import CircularProgress from '@mui/material/CircularProgress';
+import AccordionItem from '@/app/components/Accordion';
 
 const JobList = () => {
     const [jobs, setJobs] = useState([]);
@@ -54,35 +50,29 @@ const JobList = () => {
     return (
         <div>
             <Typography variant="h2" className="mb-4">Job History</Typography>
-            <List>
-                {jobs.map((job) => (
-                    <ListItem key={job.date} alignItems="flex-start">
-                        <ListItemAvatar>
-                            <Avatar alt={job.company} src={`/images/${job.company.toLowerCase()}.png`} />
-                        </ListItemAvatar>
-                        <ListItemText
-                            primary={
-                                <Typography variant="h6">
-                                    {job.title} at {job.company}
+            <div id="accordion-open" data-accordion="open">
+                {jobs.map((job, index) => (
+                    <AccordionItem
+                        key={index}
+                        title={`${job.title} at ${job.company}`}
+                        content={
+                            <div>
+                                <Typography component="span" variant="body2" color="text.primary">
+                                    {job.duration}
                                 </Typography>
-                            }
-                            secondary={
-                                <>
-                                    <Typography component="span" variant="body2" color="text.primary">
-                                        {job.duration}
-                                    </Typography>
-                                    <br />
-                                    <Typography component="span" variant="body2" color="text.secondary">
+                                <br />
+                                <Typography component="span" variant="body2" color="text.secondary">
+                                    <ul>
                                         {job.details.split(',').map(detail => (
                                             <li key={detail.trim()}>{detail.trim()}</li>
                                         ))}
-                                    </Typography>
-                                </>
-                            }
-                        />
-                    </ListItem>
+                                    </ul>
+                                </Typography>
+                            </div>
+                        }
+                    />
                 ))}
-            </List>
+            </div>
         </div>
     );
 };

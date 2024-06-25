@@ -9,13 +9,18 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@aws-sdk/client-signer": "^3.600.0",
+    "@aws-sdk/signature-v4-crt": "^3.598.0",
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
     "@headlessui/react": "^2.1.0",
     "@heroicons/react": "^2.1.4",
     "@mui/icons-material": "^5.15.20",
     "@mui/material": "^5.15.20",
+    "@react-email/components": "^0.0.19",
+    "@react-email/html": "^0.0.8",
     "aws-sdk": "^2.1646.0",
+    "aws-signature-v4": "^1.4.0",
     "next": "14.2.4",
     "node-fetch": "^3.3.2",
     "react": "^18",
