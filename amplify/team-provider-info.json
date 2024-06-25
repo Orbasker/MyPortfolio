@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-portfolio-dev-d8964-authRole",
+      "UnauthRoleArn": "arn:aws:iam::730335436836:role/amplify-portfolio-dev-d8964-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::730335436836:role/amplify-portfolio-dev-d8964-authRole",
+      "Region": "eu-west-1",
+      "DeploymentBucketName": "amplify-portfolio-dev-d8964-deployment",
+      "UnauthRoleName": "amplify-portfolio-dev-d8964-unauthRole",
+      "StackName": "amplify-portfolio-dev-d8964",
+      "StackId": "arn:aws:cloudformation:eu-west-1:730335436836:stack/amplify-portfolio-dev-d8964/30235a80-32fe-11ef-9a99-02ec9fade82f",
+      "AmplifyAppId": "dwsud309sxkgv"
+    }
+  }
+}

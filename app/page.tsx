@@ -20,7 +20,7 @@ export default function Home() {
                     <div className="flex-1">
                         <h2 className="text-2xl font-bold">About Me</h2>
                         <p>
-                            I'm a software engineer with experience in web development, cloud computing, and DevOps. I'm passionate about learning new technologies and sharing my knowledge with others.
+                            I&apos;m a software engineer with experience in web development, cloud computing, and DevOps. I&apos;m passionate about learning new technologies and sharing my knowledge with others.
                         </p>
                         <QRCodeResume />
                     </div>
