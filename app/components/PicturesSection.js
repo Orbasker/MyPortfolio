@@ -3,13 +3,6 @@ import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
-import aws from 'aws-sdk';
-
-const s3 = new aws.S3({
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-    region: process.env.AWS_REGION,
-});
 
 const PicturesSection = () => {
     const [images, setImages] = useState([]);
@@ -52,12 +45,10 @@ const PicturesSection = () => {
                 >
                     {images.map(image => (
                         <div key={image.key} className="carousel-image">
-                            <Image
-                                src={image.url}
+                            <img
+                                src={`data:${image.contentType};base64,${image.content}`}
                                 alt={image.key}
-                                fill
-                                objectFit="cover" // Adjust as per your design needs
-                                unoptimized
+                                style={{ width: '100%', height: 'auto', objectFit: 'cover' }} // Adjust styles as needed
                             />
                         </div>
                     ))}
