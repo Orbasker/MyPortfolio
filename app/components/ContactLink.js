@@ -5,6 +5,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import DOMPurify from 'dompurify';
 
 const ContactLink = () => {
     const [email, setEmail] = useState('');
@@ -15,13 +16,19 @@ const ContactLink = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         setStatus('Sending...');
+
+        // Sanitize inputs
+        const sanitizedEmail = DOMPurify.sanitize(email);
+        const sanitizedSubject = DOMPurify.sanitize(subject);
+        const sanitizedMessage = DOMPurify.sanitize(message);
+
         try {
             const response = await fetch('/api/send-email', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ email, subject, message }),
+                body: JSON.stringify({ email: sanitizedEmail, subject: sanitizedSubject, message: sanitizedMessage }),
             });
 
             if (response.ok) {

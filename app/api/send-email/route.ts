@@ -1,4 +1,5 @@
 import AWS from 'aws-sdk';
+import validator from 'validator';
 
 const lambda = new AWS.Lambda({
     accessKeyId: process.env.NEXT_PUBLIC_AWS_ACCESS_KEY_ID,
@@ -8,17 +9,26 @@ const lambda = new AWS.Lambda({
 
 const lambdaUrl = process.env.LAMBDA_EMAIL || '';
 
-export async function POST(req: Request, res: Response) {
+export async function POST(req: Request) {
     try {
         const { email, subject, message } = await req.json();
 
+        // Validate and sanitize inputs
+        if (!validator.isEmail(email)) {
+            throw new Error('Invalid email address');
+        }
+        const sanitizedEmail = validator.normalizeEmail(email);
+        const sanitizedSubject = validator.escape(subject);
+        const sanitizedMessage = validator.escape(message);
+
         // Construct the payload
         const payload = {
-            email,
-            subject,
-            message,
+            email: sanitizedEmail,
+            subject: sanitizedSubject,
+            message: sanitizedMessage,
         };
         console.log('payload', payload);
+
         // Invoke the Lambda function
         const response = await lambda.invoke({
             FunctionName: 'send_email',
@@ -34,8 +44,6 @@ export async function POST(req: Request, res: Response) {
                 'Content-Type': 'application/json',
             },
         });
-
-
     } catch (err) {
         console.error('Error processing request:', err);
         return new Response(JSON.stringify({ error: 'Error processing request' }), {
