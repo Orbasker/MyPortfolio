@@ -18,7 +18,7 @@ export async function GET() {
             Key: 'Or Basker.pdf',
             Expires: 60,
         };
-        const url = await s3.getSignedUrl('getObject', params);
+        const url = await s3.getSignedUrlPromise('getObject', params); // Changed to getSignedUrlPromise
 
         return new Response(JSON.stringify({ url }), {
             headers: {
@@ -28,12 +28,11 @@ export async function GET() {
 
     } catch (err) {
         console.error('Error generating signed URL:', err);
-        return {
-            statusCode: 500,
-            body: JSON.stringify({ error: 'Error generating signed URL' }),
+        return new Response(JSON.stringify({ error: 'Error generating signed URL' }), {
+            status: 500,
             headers: {
                 'Content-Type': 'application/json',
             },
-        };
+        });
     }
 }
