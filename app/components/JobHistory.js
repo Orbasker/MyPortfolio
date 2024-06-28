@@ -49,7 +49,6 @@ const JobList = () => {
 
     return (
         <div>
-            <Typography variant="h2" className="mb-4">Job History</Typography>
             <div id="accordion-open" data-accordion="open">
                 {jobs.map((job, index) => (
                     <AccordionItem

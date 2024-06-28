@@ -8,7 +8,7 @@ export default function Projects() {
                 <title>My Projects</title>
             </Head>
             <header className="text-center mb-8">
-                <h1 className="text-4xl font-bold">Projects</h1>
+                <h1 className="text-4xl font-bold">This is my GitHub Projects</h1>
             </header>
             <main className="container mx-auto">
                 <ProjectList />

@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import JobHistory from '@/app/components/JobHistory';
+import Typography from '@mui/material/Typography';
 
 export default function Jobs() {
     return (
@@ -8,7 +9,8 @@ export default function Jobs() {
                 <title>My Job History</title>
             </Head>
             <header className="text-center mb-8">
-                <h1 className="text-4xl font-bold">Job History</h1>
+                <Typography variant="h2" className="mb-4">My Job History</Typography>
+
             </header>
             <main className="container mx-auto">
                 <JobHistory />

@@ -7,21 +7,17 @@ const lambda = new AWS.Lambda({
     region: process.env.NEXT_PUBLIC_AWS_REGION,
 });
 
-const lambdaUrl = process.env.LAMBDA_EMAIL || '';
 
 export async function POST(req: Request) {
     try {
         const { email, subject, message } = await req.json();
 
-        // Validate and sanitize inputs
         if (!validator.isEmail(email)) {
             throw new Error('Invalid email address');
         }
         const sanitizedEmail = validator.normalizeEmail(email);
         const sanitizedSubject = validator.escape(subject);
         const sanitizedMessage = validator.escape(message);
-
-        // Construct the payload
         const payload = {
             email: sanitizedEmail,
             subject: sanitizedSubject,
@@ -29,13 +25,11 @@ export async function POST(req: Request) {
         };
         console.log('payload', payload);
 
-        // Invoke the Lambda function
         const response = await lambda.invoke({
             FunctionName: 'send_email',
             Payload: JSON.stringify(payload),
         }).promise();
 
-        // Parse the Lambda function response
         const data = JSON.parse(response.Payload as string);
 
         return new Response(JSON.stringify(data), {
