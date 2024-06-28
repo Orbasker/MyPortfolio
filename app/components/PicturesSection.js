@@ -26,7 +26,6 @@ const PicturesSection = () => {
         fetchImages();
     }, []);
 
-    console.log(images); // Add logging for images array
     return (
         <div>
             <h2 className="text-2xl font-bold mb-4">Pictures Section</h2>
@@ -45,11 +44,17 @@ const PicturesSection = () => {
                 >
                     {images.map(image => (
                         <div key={image.key} className="carousel-image">
-                            <img
+                            <Image
+                                src={`data:${image.contentType};base64,${image.content}`}
+                                alt={image.key}
+                                width={500}
+                                height={500}
+                            />
+                            {/* <img
                                 src={`data:${image.contentType};base64,${image.content}`}
                                 alt={image.key}
                                 style={{ width: '100%', height: 'auto', objectFit: 'cover' }} // Adjust styles as needed
-                            />
+                            /> */}
                         </div>
                     ))}
                 </Carousel>

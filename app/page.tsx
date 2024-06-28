@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import PicturesSection from '@/app/components/PicturesSection';
-import SocialLinks from '@/app/components/SocialLinks';
 import ProjectList from '@/app/components/ProjectList';
 import JobHIstory from '@/app/components/JobHistory';
 import QRCodeResume from '@/app/components/QRCodeResume';
@@ -22,18 +21,14 @@ export default function Home() {
                         <p>
                             I&apos;m a software engineer with experience in web development, cloud computing, and DevOps. I&apos;m passionate about learning new technologies and sharing my knowledge with others.
                         </p>
-                        <QRCodeResume />
+                        <QRCodeResume size={200} />
                     </div>
                     <div className="flex-1">
                         <ContactLink />
                     </div>
                  
                 </div>
-                {/* <JobHIstory /> */}
-                {/* <ProjectList /> */}
                 <PicturesSection />
-                {/* <SocialLinks />  */}
-                {/* {/* Add other components here */}
             </main>
         </div>
     );

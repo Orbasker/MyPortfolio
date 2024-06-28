@@ -8,25 +8,32 @@ const s3 = new AWS.S3({
 
 export async function GET() {
     try {
+        const bucketName = process.env.NEXT_PUBLIC_S3_BUCKET_NAME;
+        if (!bucketName) {
+            throw new Error('Bucket name is not defined');
+        }
+
         const params = {
-            Bucket: process.env.NEXT_PUBLIC_S3_BUCKET_NAME,
-            Key: 'Or Basker.pdf', // Path to your resume file in the bucket
-            Expires: 60 * 60, // URL expiration time in seconds (1 hour)
+            Bucket: bucketName,
+            Key: 'Or Basker.pdf',
+            Expires: 60,
         };
-        const url = s3.getSignedUrl('getObject', params);
+        const url = await s3.getSignedUrl('getObject', params);
+
         return new Response(JSON.stringify({ url }), {
-            status: 200,
             headers: {
                 'Content-Type': 'application/json',
             },
         });
+
     } catch (err) {
-        console.error('Error generating pre-signed URL:', err);
-        return new Response(JSON.stringify({ error: 'Error generating pre-signed URL' }), {
-            status: 500,
+        console.error('Error generating signed URL:', err);
+        return {
+            statusCode: 500,
+            body: JSON.stringify({ error: 'Error generating signed URL' }),
             headers: {
                 'Content-Type': 'application/json',
             },
-        });
+        };
     }
 }

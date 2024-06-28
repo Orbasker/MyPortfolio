@@ -2,24 +2,24 @@
 import React, { useEffect, useState } from 'react';
 import QRCode from 'react-qr-code';
 import CircularProgress from '@mui/material/CircularProgress';
-import Typography from '@mui/material/Typography';
 
-const QRCodeResume = () => {
+const QRCodeResume = ({ size }) => {
     const [url, setUrl] = useState('');
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
     useEffect(() => {
         const fetchUrl = async () => {
+            setLoading(true); // Ensure loading is true at the start of the fetch
             try {
                 const response = await fetch('/api/resume');
                 if (!response.ok) {
-                    throw new Error('Failed to fetch pre-signed URL');
+                    throw new Error(`HTTP error! status: ${response.status}`);
                 }
-                const data = await response.json();
-                setUrl(data.url);
+                const data = await response.text(); // Assuming the URL is returned as plain text
+                setUrl(data);
             } catch (err) {
-                console.error('Error fetching pre-signed URL:', err);
+                console.error('Error fetching URL:', err);
                 setError(err.message);
             } finally {
                 setLoading(false);
@@ -42,9 +42,8 @@ const QRCodeResume = () => {
     }
 
     return (
-        <div>
-            {/* <Typography variant="h5" className="mb-4">scan to my Resume</Typography> */}
-            <QRCode value={url} />
+        <div className="p-2">
+            <QRCode value={url} size={size} /> {/* Use the size prop */}
         </div>
     );
 };

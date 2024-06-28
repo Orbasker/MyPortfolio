@@ -13,6 +13,7 @@ import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Link from '@mui/material/Link';
+import Grid from '@mui/material/Grid';
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -42,70 +43,72 @@ const ProjectCard = ({ project }) => {
   }, [project.name]);
 
   return (
-    <Card sx={{ maxWidth: 345, minHeight: 400, display: 'flex', flexDirection: 'column' }}>
-      <CardHeader
-        avatar={
-          <Avatar sx={{ bgcolor: 'red[500]' }} aria-label="project">
-            {project.name.charAt(0)}
-          </Avatar>
-        }
-        action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
-        }
-        title={<Link href={project.url} target="_blank" rel="noopener noreferrer" underline="hover">{project.name}</Link>}
-        subheader={new Date(project.updated_at).toLocaleDateString()}
-      />
-      {project.image && (
-        <CardMedia
-          component="img"
-          height="194"
-          image={project.image}
-          alt={project.name}
+    <Grid item xs={12} sm={10} md={10} lg={12}>
+      <Card sx={{ maxWidth: 345, height: 200, maxHeight: 400, display: 'flex', flexDirection: 'column' }}>
+        <CardHeader
+          avatar={
+            <Avatar sx={{ bgcolor: 'red[500]' }} aria-label="project">
+              {project.name.charAt(0)}
+            </Avatar>
+          }
+          action={
+            <IconButton aria-label="settings">
+              <MoreVertIcon />
+            </IconButton>
+          }
+          title={<Link href={project.url} target="_blank" rel="noopener noreferrer" underline="hover">{project.name}</Link>}
+          subheader={new Date(project.updated_at).toLocaleDateString()}
         />
-      )}
-      <CardContent id={`card-content-${project.name}`}>
-        <Typography variant="body2" color="text.secondary">
-          {project.description || "No description available"}
-        </Typography>
-        {project.language && (
-          <Typography paragraph>
-            Language: {project.language}
-          </Typography>
+        {project.image && (
+          <CardMedia
+            component="img"
+            height="140"
+            image={project.image}
+            alt={project.name}
+          />
         )}
-        <Typography>
-          Created at: {new Date(project.created_at).toLocaleDateString()}
-        </Typography>
-      </CardContent>
-      {needsExpansion && (
-        <CardActions disableSpacing>
-          <ExpandMore
-            expand={expanded}
-            onClick={handleExpandClick}
-            aria-expanded={expanded}
-            aria-label="show more"
-          >
-            <ExpandMoreIcon />
-          </ExpandMore>
-        </CardActions>
-      )}
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
-          <Typography paragraph>
-            {project.description}
+        <CardContent id={`card-content-${project.name}`} sx={{ overflow: 'hidden', textOverflow: 'ellipsis', flexGrow: 1 }}>
+          <Typography variant="body2" color="text.secondary" noWrap>
+            {project.description || "No description available"}
           </Typography>
           {project.language && (
-            <Typography paragraph>
+            <Typography paragraph noWrap>
               Language: {project.language}
             </Typography>
           )}
-          <Typography>
+          <Typography noWrap>
             Created at: {new Date(project.created_at).toLocaleDateString()}
           </Typography>
         </CardContent>
-      </Collapse>
-    </Card>
+        {needsExpansion && (
+          <CardActions disableSpacing>
+            <ExpandMore
+              expand={expanded}
+              onClick={handleExpandClick}
+              aria-expanded={expanded}
+              aria-label="show more"
+            >
+              <ExpandMoreIcon />
+            </ExpandMore>
+          </CardActions>
+        )}
+        <Collapse in={expanded} timeout="auto" unmountOnExit>
+          <CardContent>
+            <Typography paragraph>
+              {project.description}
+            </Typography>
+            {project.language && (
+              <Typography paragraph>
+                Language: {project.language}
+              </Typography>
+            )}
+            <Typography>
+              Created at: {new Date(project.created_at).toLocaleDateString()}
+            </Typography>
+          </CardContent>
+        </Collapse>
+      </Card>
+    </Grid>
   );
 };
 
