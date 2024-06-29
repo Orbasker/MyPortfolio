@@ -1,22 +1,11 @@
 import { AWS, cloudwatch } from '@/awsConfig';
-import { log, time } from 'console';
+
 
 const lambda = new AWS.Lambda();
-const cloudwatchLogs = new AWS.CloudWatchLogs();
 
 export async function GET() {
     try {
-        const params = {
-            logGroupName: process.env.LAMBDA_RESUME as string,
-            logStreamName: time.toString(),
-            logEvents: [
-                {
-                    message: 'Generating signed URL',
-                    timestamp: Date.now(),
-                },
-            ],
-        };
-        // await cloudwatchLogs.putLogEvents(params).promise();
+
         const response = await lambda.invoke({
             FunctionName: process.env.LAMBDA_RESUME as string,
             InvocationType: 'RequestResponse',
