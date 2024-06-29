@@ -11,7 +11,6 @@ import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 
@@ -43,21 +42,17 @@ const ProjectCard = ({ project }) => {
   }, [project.name]);
 
   return (
-    <Grid item xs={12} sm={10} md={10} lg={12}>
-      <Card sx={{ maxWidth: 345, height: 200, maxHeight: 400, display: 'flex', flexDirection: 'column' }}>
+    <Grid item xs={12} sm={8} md={10} lg={16} className="p-4">
+      <Card className="flex flex-col justify-between max-w-xs w-full bg-white shadow-lg rounded-lg overflow-hidden">
         <CardHeader
           avatar={
             <Avatar sx={{ bgcolor: 'red[500]' }} aria-label="project">
               {project.name.charAt(0)}
             </Avatar>
           }
-          action={
-            <IconButton aria-label="settings">
-              <MoreVertIcon />
-            </IconButton>
-          }
-          title={<Link href={project.url} target="_blank" rel="noopener noreferrer" underline="hover">{project.name}</Link>}
-          subheader={new Date(project.updated_at).toLocaleDateString()}
+
+          title={<Link href={project.url} target="_blank" rel="noopener noreferrer" underline="hover" className="text-blue-600">{project.name}</Link>}
+          subheader={<Typography className="text-gray-500">{new Date(project.updated_at).toLocaleDateString()}</Typography>}
         />
         {project.image && (
           <CardMedia
@@ -65,23 +60,27 @@ const ProjectCard = ({ project }) => {
             height="140"
             image={project.image}
             alt={project.name}
+            className="object-cover"
           />
         )}
-        <CardContent id={`card-content-${project.name}`} sx={{ overflow: 'hidden', textOverflow: 'ellipsis', flexGrow: 1 }}>
-          <Typography variant="body2" color="text.secondary" noWrap>
+        <CardContent
+          id={`card-content-${project.name}`}
+          className={`overflow-hidden text-ellipsis ${expanded ? 'h-auto' : 'h-24'} transition-height duration-300`}
+        >
+          <Typography variant="body2" className="text-gray-700">
             {project.description || "No description available"}
           </Typography>
           {project.language && (
-            <Typography paragraph noWrap>
+            <Typography paragraph className="text-gray-700">
               Language: {project.language}
             </Typography>
           )}
-          <Typography noWrap>
+          <Typography className="text-gray-700">
             Created at: {new Date(project.created_at).toLocaleDateString()}
           </Typography>
         </CardContent>
         {needsExpansion && (
-          <CardActions disableSpacing>
+          <CardActions disableSpacing className="justify-end">
             <ExpandMore
               expand={expanded}
               onClick={handleExpandClick}
@@ -94,7 +93,7 @@ const ProjectCard = ({ project }) => {
         )}
         <Collapse in={expanded} timeout="auto" unmountOnExit>
           <CardContent>
-            <Typography paragraph>
+            <Typography paragraph className="break-words whitespace-pre-wrap">
               {project.description}
             </Typography>
             {project.language && (
