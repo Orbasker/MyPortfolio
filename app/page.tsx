@@ -12,7 +12,7 @@ export default function Home() {
                 <title>My Portfolio</title>
             </Head>
             <header className="text-center mb-8">
-                <h1 className="text-4xl font-bold">Welcome to My Portfolio</h1>
+                <h1 className="text-4xl font-bold">Welcome to Or Basker Portfolio</h1>
             </header>
             <main className="container mx-auto p-4">
                 <div className="flex flex-col md:flex-row md:space-x-4">
