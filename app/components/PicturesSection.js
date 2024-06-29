@@ -50,11 +50,6 @@ const PicturesSection = () => {
                                 width={500}
                                 height={500}
                             />
-                            {/* <img
-                                src={`data:${image.contentType};base64,${image.content}`}
-                                alt={image.key}
-                                style={{ width: '100%', height: 'auto', objectFit: 'cover' }} // Adjust styles as needed
-                            /> */}
                         </div>
                     ))}
                 </Carousel>

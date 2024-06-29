@@ -1,10 +1,6 @@
-import AWS from 'aws-sdk';
+import { AWS, cloudwatch } from '@/awsConfig';
 
-const dynamoDB = new AWS.DynamoDB.DocumentClient({
-    accessKeyId: process.env.NEXT_PUBLIC_AWS_ACCESS_KEY_ID,
-    secretAccessKey: process.env.NEXT_PUBLIC_AWS_SECRET_ACCESS_KEY,
-    region: process.env.NEXT_PUBLIC_AWS_REGION,
-});
+const dynamoDB = new AWS.DynamoDB.DocumentClient();
 
 export async function GET() {
     try {
