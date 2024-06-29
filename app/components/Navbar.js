@@ -1,9 +1,9 @@
 'use client';
-import React from 'react';
+// import React, { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import QRCodeResume from './QRCodeResume'; // Make sure to import the QRCodeResume component
-
+import PhoneNumber from './PhoneNumber'; // Make sure to import the PhoneNumber component
 const navigation = [
     { name: 'Home', href: '/' },
     { name: 'Projects', href: '/projects' },
@@ -16,6 +16,7 @@ function classNames(...classes) {
 
 const Navbar = () => {
     const pathname = usePathname();
+
 
     return (
         <nav className="bg-gray-800">
@@ -43,6 +44,11 @@ const Navbar = () => {
                             })}
                         </div>
                     </div>
+                    {(
+                        <div className="flex items-center space-x-2">
+                            <PhoneNumber />
+                        </div>
+                    )}
                 </div>
             </div>
         </nav>
